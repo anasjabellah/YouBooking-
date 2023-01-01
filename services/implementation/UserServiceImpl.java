@@ -1,0 +1,109 @@
+package com.example.bookingmt.services.implementation;
+
+import com.example.bookingmt.entities.Reservation;
+import com.example.bookingmt.entities.User;
+import com.example.bookingmt.enumeration.Status;
+import com.example.bookingmt.repositories.UserRepository;
+import com.example.bookingmt.services.ReservationService;
+import com.example.bookingmt.services.UserService;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.Optional;
+
+
+@Service
+public class UserServiceImpl implements UserService {
+
+    private final UserRepository userRepository;
+    private final ReservationService reservationService ;
+
+    public UserServiceImpl(UserRepository userRepository, ReservationService reservationService) {
+        this.userRepository = userRepository;
+        this.reservationService = reservationService;
+    }
+
+    @Override
+    public void AddUser(User user) {
+        if (user.getUserName() == null &&  user.getEmail() == null && user.getPassword() == null ){
+            System.out.println("data is null");
+        }else {
+            userRepository.save(user);
+        }
+    }
+
+    @Override
+    public List<User> GetAllUser() {
+        return userRepository.findAll();
+    }
+
+    @Override
+     public User findByEmail(String Email) {
+        return userRepository.findByEmail(Email);
+    }
+
+    @Override
+    public Optional<User> findById(long id) {
+        return userRepository.findById(id);
+    }
+
+    @Override
+    public void updateUser(User user) {userRepository.save(user);}
+
+
+    @Override
+    public void AccepterReservation(Long id) {
+
+        Reservation reservation = reservationService.findById(id).orElse(null);
+
+        if(reservation != null){
+            System.out.println("reservation is null ");
+        }else {
+            reservation.setStatus(Status.Accepter);
+        }
+
+    }
+
+
+    @Override
+    public Boolean DeleteUser(long id) {
+
+        userRepository.deleteById(id);
+
+        if(userRepository.findById(id) != null){
+            return Boolean.FALSE ;
+        }else {
+            return Boolean.TRUE ;
+        }
+
+    }
+
+
+    @Override
+    public void addUserRool(String User, String Rool) {
+
+    }
+
+    @Override
+    public Boolean isBanned(Long id) {
+        User user  = userRepository.findById(id).orElse(null);
+        if(user != null){
+            if(user.isBanned()){
+                return true ;
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public List<User> listBanned() {
+        List<User> listUserBannding = (List<User>)
+                userRepository.findAll().stream().filter(user -> user.isBanned() == true);
+        return listUserBannding;
+
+    }
+    @Override
+    public List<User> findAllByBanned(boolean banned) {
+        return userRepository.findAllByBanned(banned);
+    }
+}

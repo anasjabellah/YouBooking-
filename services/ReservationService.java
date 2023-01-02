@@ -11,7 +11,7 @@ public interface ReservationService {
 
 
     // add user in data
-    void AddReservation(Reservation reservation ,User user , Room room);
+    void AddReservation(Reservation reservation , Long userId , Long roomId);
 
     // list user
    List<Reservation> GetAllRes();

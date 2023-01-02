@@ -1,6 +1,7 @@
 package com.example.bookingmt.services.implementation;
 
 import com.example.bookingmt.entities.Reservation;
+import com.example.bookingmt.entities.Role;
 import com.example.bookingmt.entities.User;
 import com.example.bookingmt.enumeration.Status;
 import com.example.bookingmt.repositories.UserRepository;
@@ -80,28 +81,23 @@ public class UserServiceImpl implements UserService {
 
 
     @Override
-    public void addUserRool(String User, String Rool) {
-
+    public void addUserRool(Long userId, Role role) {
+        User user = userRepository.findById(userId).orElse(null);
+        user.setRoles((List<Role>) role);
     }
 
     @Override
     public Boolean isBanned(Long id) {
         User user  = userRepository.findById(id).orElse(null);
-        if(user != null){
-            if(user.isBanned()){
-                return true ;
-            }
+        user.setBanned(false);
+        if (user.isBanned() != false){
+            System.out.println("is not baned");
+            return false ;
         }
-        return false;
+        return true ;
     }
 
-    @Override
-    public List<User> listBanned() {
-        List<User> listUserBannding = (List<User>)
-                userRepository.findAll().stream().filter(user -> user.isBanned() == true);
-        return listUserBannding;
 
-    }
     @Override
     public List<User> findAllByBanned(boolean banned) {
         return userRepository.findAllByBanned(banned);

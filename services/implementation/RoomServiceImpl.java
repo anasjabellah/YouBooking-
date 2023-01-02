@@ -17,7 +17,6 @@ public class RoomServiceImpl implements RoomService {
 
     @Override
     public void AddRoom(Room room) {
-       // if (room.getNumberRoom() == null && room.getCapacity() == null && room.getPrice() == null)
         roomRepository.save(room);
     }
 
@@ -34,11 +33,19 @@ public class RoomServiceImpl implements RoomService {
     @Override
     public Boolean Delete(Long id) {
         roomRepository.deleteById(id);
-        return null;
+        return true;
     }
 
     @Override
-    public void updateRoom(Room room) {}
+    public void updateRoom(Room room ,  Long id) {
+        Room room1 = roomRepository.findById(id).orElse(null);
+        room1.setNumberRoom(room.getNumberRoom());
+        room1.setCapacity(room.getCapacity());
+        room1.setOption(room.getOption());
+        room1.setPrice(room.getPrice());
+        roomRepository.save(room1);
+
+    }
 
     @Override
     public void optionRoom(Long id) {}

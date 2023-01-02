@@ -49,7 +49,13 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void updateUser(User user) {userRepository.save(user);}
+    public void updateUser(User user , Long id) {
+        User user1 = userRepository.findById(id).orElse(null);
+        user1.setUserName(user.getUserName());
+        user1.setEmail(user.getEmail());
+        user1.setPassword(user.getPassword());
+        userRepository.save(user)
+        ;}
 
 
     @Override
@@ -68,7 +74,6 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Boolean DeleteUser(long id) {
-
         userRepository.deleteById(id);
 
         if(userRepository.findById(id) != null){

@@ -20,12 +20,15 @@ public class RoleServiceImpl implements RoleService {
     }
 
     @Override
-    public void updateRole(Role role) {
-        roleRepository.save(role);
+    public void updateRole(Role role , Long id) {
+        Role role1 = roleRepository.findById(id).orElse(null);
+        role1.setRoleName(role.getRoleName());
+        roleRepository.save(role1);
     }
 
     @Override
     public Boolean DeleteRole(Long id) {
+        roleRepository.deleteById(id);
         return Boolean.TRUE;
     }
 

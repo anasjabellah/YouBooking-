@@ -23,7 +23,7 @@ public interface UserService {
     Optional<User> findById(long id);
 
     // update user
-    void updateUser(User user);
+    void updateUser(User user , Long id);
 
     void  AccepterReservation(Long id);
 

@@ -10,7 +10,7 @@ public interface RoleService {
     // add role
     void  addRole(Role role);
     // update Role
-    void updateRole(Role role);
+    void updateRole(Role role , Long id);
     // delete Role
     Boolean DeleteRole(Long id);
 

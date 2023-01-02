@@ -8,6 +8,7 @@ import com.example.bookingmt.services.HotelService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class HotelServiceImpl implements HotelService {
@@ -38,18 +39,30 @@ public class HotelServiceImpl implements HotelService {
         return hotelRepository.findAll();
     }
 
+    @Override
+    public Optional<Hotel> findById(long id) {
+        return hotelRepository.findById(id);
+    }
+
 
     public Hotel findByName(String NameHotel) {
         return null ; // hotelRepository.findByName(NameHotel);
     }
 
     @Override
-    public void updateHotel(Hotel hotel) {
+    public void updateHotel(Hotel hotel , Long id) {
+        Hotel hotel1 = hotelRepository.findById(id).orElse(null);
+        hotel1.setName(hotel.getName());
+        hotel1.setAddress(hotel.getAddress());
+        hotel1.setCity(hotel.getCity());
+        hotelRepository.save(hotel1);
 
     }
 
     @Override
     public Boolean DeleteHotel(Long id) {
+        Hotel hotel = hotelRepository.findById(id).orElse(null);
+        hotelRepository.delete(hotel);
         return Boolean.TRUE;
     }
 }

@@ -54,7 +54,7 @@ public class UserServiceImpl implements UserService {
         user1.setUserName(user.getUserName());
         user1.setEmail(user.getEmail());
         user1.setPassword(user.getPassword());
-        userRepository.save(user)
+        userRepository.save(user1)
         ;}
 
 
@@ -62,7 +62,6 @@ public class UserServiceImpl implements UserService {
     public void AccepterReservation(Long id) {
 
         Reservation reservation = reservationService.findById(id).orElse(null);
-
         if(reservation != null){
             System.out.println("reservation is null ");
         }else {
@@ -88,7 +87,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public void addUserRool(Long userId, Role role) {
         User user = userRepository.findById(userId).orElse(null);
-        user.setRoles((List<Role>) role);
+        user.getRoles().add(role);
     }
 
     @Override

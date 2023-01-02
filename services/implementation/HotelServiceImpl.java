@@ -24,14 +24,13 @@ public class HotelServiceImpl implements HotelService {
 
 
     @Override
-    public void AddHotel(Hotel hotel, Long idManager) {
+    public Hotel addHotel(Hotel hotel, Long idManager) {
         User user = userRepository.findById(idManager).orElse(null);
         if(hotel.getAddress() != null && hotel.getCity() != null && hotel.getName() != null){
-            if(user.getRoles().equals("manadger") && user.getRoles().equals("admin")){
                 hotel.setManager(user);
                 hotelRepository.save(hotel);
-            }
         }
+        return hotel;
     }
 
     @Override
@@ -50,13 +49,14 @@ public class HotelServiceImpl implements HotelService {
     }
 
     @Override
-    public void updateHotel(Hotel hotel , Long id) {
+    public Hotel updateHotel(Hotel hotel , Long id) {
         Hotel hotel1 = hotelRepository.findById(id).orElse(null);
         hotel1.setName(hotel.getName());
         hotel1.setAddress(hotel.getAddress());
         hotel1.setCity(hotel.getCity());
         hotelRepository.save(hotel1);
 
+        return hotel1;
     }
 
     @Override

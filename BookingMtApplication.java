@@ -18,6 +18,8 @@ public class BookingMtApplication {
         SpringApplication.run(BookingMtApplication.class, args);
     }
 
+
+
   /*  @Bean
     public FilterRegistrationBean<CorsFilter> simpleCorsFilter() {
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();

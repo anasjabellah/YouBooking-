@@ -40,8 +40,7 @@ public class HotelResource {
     public Hotel save(@RequestBody Hotel hotel , @PathVariable Long idManadger) {
         return hotelService.addHotel(hotel,idManadger);
     }
-
-
+    
     @PutMapping("/update/{idHotel}")
     public Hotel update(@RequestBody Hotel hotel , @PathVariable Long idHotel) {
         return hotelService.updateHotel(hotel , idHotel);

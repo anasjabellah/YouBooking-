@@ -1,23 +1,34 @@
 package com.example.bookingmt.services.implementation;
 
+import com.example.bookingmt.entities.Hotel;
 import com.example.bookingmt.entities.Room;
+import com.example.bookingmt.repositories.HotelRepository;
 import com.example.bookingmt.repositories.RoomRepository;
 import com.example.bookingmt.services.RoomService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
+@Service
 public class RoomServiceImpl implements RoomService {
 
     @Autowired
+    private  final HotelRepository hotelRepository;
+    @Autowired
     private final RoomRepository roomRepository;
 
-    public RoomServiceImpl(RoomRepository roomRepository) {this.roomRepository = roomRepository;}
+    public RoomServiceImpl(HotelRepository hotelRepository, RoomRepository roomRepository) {
+        this.hotelRepository = hotelRepository;
+        this.roomRepository = roomRepository;}
 
     @Override
-    public void AddRoom(Room room) {
+    public Room AddRoom(Room room , Long id) {
+        Hotel hotel = hotelRepository.findById(id).orElse(null);
+        room.setHotel(hotel);
         roomRepository.save(room);
+        return room;
     }
 
     @Override

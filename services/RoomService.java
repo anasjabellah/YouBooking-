@@ -7,10 +7,11 @@ import java.util.Optional;
 
 public interface RoomService {
 
-    void AddRoom(Room room);
+    Room AddRoom(Room room , Long id);
     Optional<Room> findByid(Long id);
     List<Room> GetAllRoom();
     Boolean Delete(Long id);
     void updateRoom(Room room , Long id);
     void optionRoom(Long id);
+
 }

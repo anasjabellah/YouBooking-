@@ -8,16 +8,23 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 @RestController
-@CrossOrigin("http://localhost:4200")
-@RequestMapping(path = "/Rooms")
+@CrossOrigin("http://localhost:4200/")
+@RequestMapping(path = "/room")
 public class RoomResource {
 
     @Autowired
     RoomService roomService;
 
+
+    @GetMapping(path = "/All")
+    public ResponseEntity<List<Room>> getAllHotels(){
+        List<Room> rooms  = roomService.GetAllRoom() ;
+        return ResponseEntity.ok(rooms);
+    }
 
     @PostMapping("/add/{idHotel}")
     public Room save(@RequestBody Room room , @PathVariable Long idHotel) {

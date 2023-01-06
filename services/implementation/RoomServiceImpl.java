@@ -24,8 +24,9 @@ public class RoomServiceImpl implements RoomService {
         this.roomRepository = roomRepository;}
 
     @Override
-    public Room AddRoom(Room room , Long id) {
+    public Room AddRoom(Room room , Long id ) {
         Hotel hotel = hotelRepository.findById(id).orElse(null);
+
         room.setHotel(hotel);
         roomRepository.save(room);
         return room;

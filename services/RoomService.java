@@ -14,4 +14,6 @@ public interface RoomService {
     void updateRoom(Room room , Long id);
     void optionRoom(Long id);
 
+    List<Room> findByHotelId(Long id);
+
 }

@@ -61,4 +61,9 @@ public class RoomServiceImpl implements RoomService {
 
     @Override
     public void optionRoom(Long id) {}
+
+    @Override
+    public List<Room> findByHotelId(Long id) {
+        return roomRepository.findByHotelId(id);
+    }
 }

@@ -13,7 +13,6 @@ import java.util.List;
 @Setter
 @Getter
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class,property = "id")
-@ToString
 // @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public class User {
 
@@ -30,9 +29,18 @@ public class User {
     private List<Role> roles ;
 
     @OneToMany(mappedBy = "client",fetch = FetchType.LAZY)
+    @JsonIgnore
     private List<Reservation> reservationList;
 
-//    public boolean isBanned(){
-//        return banned;
-//    }
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", userName='" + userName + '\'' +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", banned=" + banned +
+                ", roles=" + roles +
+                '}';
+    }
 }

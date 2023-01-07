@@ -2,6 +2,7 @@ package com.example.bookingmt.entities;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.*;
 
@@ -14,6 +15,7 @@ import java.util.List;
 @NoArgsConstructor
 @Getter @Setter
 @ToString
+@JsonIgnoreProperties(value={"roomList" }, allowSetters= true)
 public class Hotel implements Serializable {
 
     @Id
@@ -30,7 +32,17 @@ public class Hotel implements Serializable {
     private boolean isApproved;
 
     @OneToMany(mappedBy = "hotel",fetch = FetchType.LAZY)
-    @JsonIgnore
     private List<Room> roomList;
 
+    @Override
+    public String toString() {
+        return "Hotel{" +
+                "id=" + id +
+                ", Name='" + Name + '\'' +
+                ", City='" + City + '\'' +
+                ", Address='" + Address + '\'' +
+                ", manager=" + manager +
+                ", isApproved=" + isApproved +
+                '}';
+    }
 }

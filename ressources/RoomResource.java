@@ -2,6 +2,7 @@ package com.example.bookingmt.ressources;
 
 import com.example.bookingmt.entities.Hotel;
 import com.example.bookingmt.entities.Room;
+import com.example.bookingmt.entities.User;
 import com.example.bookingmt.services.RoomService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -39,5 +40,12 @@ public class RoomResource {
         }else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
+    }
+
+
+    @GetMapping(path = "/findRoom/{id}")
+    public ResponseEntity<List<Room>> findByHotel(@PathVariable Long id){
+        List<Room> allRoomByHotel = roomService.findByHotelId(id);
+        return ResponseEntity.ok(allRoomByHotel);
     }
 }

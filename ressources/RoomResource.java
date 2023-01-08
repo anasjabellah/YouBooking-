@@ -48,4 +48,11 @@ public class RoomResource {
         List<Room> allRoomByHotel = roomService.findByHotelId(id);
         return ResponseEntity.ok(allRoomByHotel);
     }
+
+
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<?>  deletRoom(@PathVariable("id") Long id){
+        roomService.Delete(id);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
 }

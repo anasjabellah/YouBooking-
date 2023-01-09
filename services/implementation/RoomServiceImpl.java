@@ -49,13 +49,13 @@ public class RoomServiceImpl implements RoomService {
     }
 
     @Override
-    public void updateRoom(Room room ,  Long id) {
+    public Room updateRoom(Room room ,  Long id) {
         Room room1 = roomRepository.findById(id).orElse(null);
         room1.setNumberRoom(room.getNumberRoom());
         room1.setCapacity(room.getCapacity());
         room1.setOption(room.getOption());
         room1.setPrice(room.getPrice());
-        roomRepository.save(room1);
+        return roomRepository.save(room1);
 
     }
 

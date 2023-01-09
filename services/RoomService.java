@@ -11,7 +11,7 @@ public interface RoomService {
     Optional<Room> findByid(Long id);
     List<Room> GetAllRoom();
     Boolean Delete(Long id);
-    void updateRoom(Room room , Long id);
+    Room updateRoom(Room room , Long id);
     void optionRoom(Long id);
 
     List<Room> findByHotelId(Long id);

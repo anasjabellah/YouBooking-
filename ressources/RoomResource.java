@@ -49,6 +49,11 @@ public class RoomResource {
         return ResponseEntity.ok(allRoomByHotel);
     }
 
+    @PostMapping("/update/{idRoom}")
+    public Room update(@RequestBody  Room room , @PathVariable Long idRoom) {
+        return roomService.updateRoom(room , idRoom);
+    }
+
 
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<?>  deletRoom(@PathVariable("id") Long id){
